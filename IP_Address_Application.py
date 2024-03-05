@@ -1,6 +1,6 @@
 import requests
 import time
-from tkinter import Tk, Label, Entry, Button, Text
+from tkinter import Tk, Label, Entry, Button, Text, font
 
 def get_ip_info(api_key, ip_address=None):
   """Fetches IP address information using the specified API and returns a dictionary."""
@@ -51,6 +51,12 @@ def main():
 
   window = Tk()
   window.title("IP Address Information")
+  window.geometry("500x300")  # Set window size
+
+  # Increase font size for title
+  title_font = font.Font(family="Arial", size=16, weight="bold")
+  title_label = Label(window, text="IP Address Information", font=title_font)
+  title_label.pack(pady=10)  # Add padding
 
   
   ip_label = Label(window, text="Enter IP Address (optional):")
