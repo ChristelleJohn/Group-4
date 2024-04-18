@@ -1,6 +1,10 @@
 import requests
+<<<<<<< HEAD
 import time
 from tkinter import Tk, Label, Entry, Button, Text, font, BooleanVar, Checkbutton, Frame
+=======
+import timefrom tkinter import Tk, Label, Entry, Button, Text, font, BooleanVar, Checkbutton, Frame
+>>>>>>> 86ac2f180494917a04dbfc7ae8284576cc8ae58b
 
 def get_ip_info(api_key, ip_address=None, fields=None):
     """Fetches IP address information using the specified API and returns a dictionary."""
@@ -75,6 +79,7 @@ def main():
         checkbox = Checkbutton(frame, text=field, variable=var)
         checkbox.grid(row=i // 2, column=i % 2, sticky='w')
         selected_fields.append((field, var))
+<<<<<<< HEAD
 
     fetch_button = Button(window, text="Fetch Info", command=lambda: fetch_ip_info(api_key, ip_entry, text_widget, [field for field, var in selected_fields if var.get()]))
     fetch_button.pack()
@@ -86,3 +91,16 @@ def main():
 
 if __name__ == '__main__':
   main()
+=======
+
+    fetch_button = Button(window, text="Fetch Info", command=lambda: fetch_ip_info(api_key, ip_entry, text_widget, [field for field, var in selected_fields if var.get()]))
+    fetch_button.pack()
+
+    text_widget = Text(window, width=70, height=17)
+    text_widget.pack()
+
+    window.mainloop()
+
+if __name__ == "__main__":
+  main()
+>>>>>>> 86ac2f180494917a04dbfc7ae8284576cc8ae58b
