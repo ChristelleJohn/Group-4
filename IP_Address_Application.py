@@ -68,7 +68,7 @@ def main():
   fetch_button = Button(window, text="Fetch Info", command=lambda: fetch_ip_info(api_key, ip_entry, text_widget))
   fetch_button.pack()
 
-  text_widget = Text(window, width=50, height=15)
+  text_widget = Text(window, width=55, height=15)
   text_widget.pack()
 
   window.mainloop()
