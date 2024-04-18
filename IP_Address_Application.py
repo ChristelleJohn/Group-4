@@ -1,6 +1,5 @@
 import requests
-import time
-from tkinter import Tk, Label, Entry, Button, Text, font, BooleanVar, Checkbutton, Frame
+import timefrom tkinter import Tk, Label, Entry, Button, Text, font, BooleanVar, Checkbutton, Frame
 
 def get_ip_info(api_key, ip_address=None, fields=None):
     """Fetches IP address information using the specified API and returns a dictionary."""
@@ -85,4 +84,4 @@ def main():
     window.mainloop()
 
 if __name__ == "__main__":
-    main()
+  main()
