@@ -51,7 +51,7 @@ def main():
 
   window = Tk()
   window.title("IP Address Information")
-  window.geometry("500x300")  # Set window size
+  window.geometry("500x500")  # Set window size
 
   # Increase font size for title
   title_font = font.Font(family="Arial", size=16, weight="bold")
@@ -68,7 +68,7 @@ def main():
   fetch_button = Button(window, text="Fetch Info", command=lambda: fetch_ip_info(api_key, ip_entry, text_widget))
   fetch_button.pack()
 
-  text_widget = Text(window, width=50, height=15)
+  text_widget = Text(window, width=55, height=17)
   text_widget.pack()
 
   window.mainloop()
