@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Necessary for session management
 
 @app.route('/', methods=['GET', 'POST'])
-def index():
+def test_index():
     api_key = "767d97f0f74e48408bce2b8588833d41"  # Replace with your actual API key
     if 'search_history' not in session:
         session['search_history'] = []
