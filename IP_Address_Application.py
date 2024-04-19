@@ -98,10 +98,10 @@ def main():
         selected_fields.append((field, var))
 
     fetch_button = Button(frame, text="Fetch Info", command=lambda: fetch_ip_info(api_key, ip_entry, text_widget, [field for field, var in selected_fields if var.get()]), bg="#007bff", fg="white")
-    fetch_button.grid(row=len(fields) // 2, column=0, sticky='ew', pady=5)
+    fetch_button.grid(row=len(fields) // 2, column=0, sticky='ew', pady=10)
 
     clear_button = Button(frame, text="Clear", command=lambda: clear_text_widget(text_widget), bg="#dc3545", fg="white")
-    clear_button.grid(row=len(fields) // 2, column=1, sticky='ew', pady=5)
+    clear_button.grid(row=len(fields) // 2, column=1, sticky='ew', pady=10)
 
     text_widget = Text(window, width=70, height=17)
     text_widget.pack()
