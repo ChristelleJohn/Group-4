@@ -1,17 +1,25 @@
+# Ipadd.py
 import requests
-import time
 from tkinter import Tk, Label, Entry, Button, Text, font, BooleanVar, Checkbutton, Frame
 from tkinter import ttk
 
 def get_ip_info(api_key, ip_address=None, fields=None):
-    """Fetches IP address information using the specified API and returns a dictionary."""
+    """
+    Fetches IP address information using the specified API and returns a dictionary.
+
+    :param api_key: The API key for the IP geolocation service.
+    :param ip_address: The IP address to fetch information for (optional).
+    :param fields: A list of fields to include in the response (optional).
+    :return: A dictionary containing IP address information or an error message.
+    """
     url = f"https://api.ipgeolocation.io/ipgeo?apiKey={api_key}"
     if ip_address:
         url += f"&ip={ip_address}"
     if fields:
         url += f"&fields={','.join(fields)}"
+
     try:
-        response = requests.get(url)
+        response = requests.get(url, timeout=10)  # Add a timeout argument
         if response.status_code == 200:
             return response.json()
         else:
@@ -20,7 +28,12 @@ def get_ip_info(api_key, ip_address=None, fields=None):
         return {"error": f"Network Error: {e}"}
 
 def display_ip_info(ip_data, text_widget):
-    """Displays the provided IP information in a formatted way within the text widget."""
+    """
+    Displays the provided IP information in a formatted way within the text widget.
+
+    :param ip_data: A dictionary containing IP address information or an error message.
+    :param text_widget: The text widget where the information will be displayed.
+    """
     text_widget.delete("1.0", "end")
     if "error" in ip_data:
         text_widget.insert("end", f"Error: {ip_data['error']}")
@@ -30,7 +43,14 @@ def display_ip_info(ip_data, text_widget):
             text_widget.insert("end", f"  {key}: {value}\n")
 
 def fetch_ip_info(api_key, ip_entry, text_widget, fields):
-    """Fetches IP information based on user input or retrieves user's own IP."""
+    """
+    Fetches IP information based on user input or retrieves the user's own IP.
+
+    :param api_key: The API key for the IP geolocation service.
+    :param ip_entry: The Tkinter Entry widget for IP address input.
+    :param text_widget: The Tkinter Text widget for displaying IP information.
+    :param fields: A list of fields to include in the response (optional).
+    """
     ip_address = ip_entry.get().strip()
     if ip_address:
         # Validate IP address format
@@ -45,11 +65,20 @@ def fetch_ip_info(api_key, ip_entry, text_widget, fields):
     display_ip_info(ip_data, text_widget)
 
 def clear_text_widget(text_widget):
-    """Clears the text widget."""
+    """
+    Clears the contents of the text widget.
+
+    :param text_widget: The Tkinter Text widget to clear.
+    """
     text_widget.delete("1.0", "end")
 
 def is_valid_ip(ip):
-    """Validates the format of an IP address."""
+    """
+    Validates the format of an IP address.
+
+    :param ip: The IP address to validate.
+    :return: True if the IP address is valid, False otherwise.
+    """
     parts = ip.split('.')
     if len(parts) != 4:
         return False
