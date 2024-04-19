@@ -19,7 +19,7 @@ def get_ip_info(api_key, ip_address=None, fields=None):
         url += f"&fields={','.join(fields)}"
 
     try:
-        response = requests.get(url, timeout=10)  # Add a timeout argument
+        response = requests.get(url, timeout=10)
         if response.status_code == 200:
             return response.json()
         else:
@@ -93,12 +93,12 @@ def main():
     window = Tk()
     window.title("IP Address Information")
     window.geometry("650x600")
-    window.configure(bg="#f0f0f0")  # Set background color
+    window.configure(bg="#f0f0f0")
 
     # Increase font size for title
     title_font = font.Font(family="Arial", size=16, weight="bold")
     title_label = Label(window, text="IP Address Information", font=title_font, bg="#f0f0f0")
-    title_label.pack(pady=10)  # Add padding
+    title_label.pack(pady=10)
 
     ip_label = Label(window, text="Enter IP Address (optional):", bg="#f0f0f0")
     ip_label.pack()
@@ -115,7 +115,7 @@ def main():
 
     fields = ['country_code3', 'country_name', 'city', 'state_prov', 'time_zone', 'latitude', 'longitude', 'organization', 'isp', 'asn']
     selected_fields = []
-    
+
     frame = Frame(window, bg="#f0f0f0")
     frame.pack()
 
