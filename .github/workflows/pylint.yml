@@ -28,9 +28,5 @@ jobs:
 
     - name: Run tests with pytest
       run: |
-        pytest
-
-    - name: Run the Python script
-      run: |
-        python Ipadd.py
-        python app.py
+        pytest Ipadd.py
+        pytest app.py
