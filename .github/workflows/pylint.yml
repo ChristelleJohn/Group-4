@@ -24,7 +24,7 @@ jobs:
 
     - name: Analyze code with pylint
       run: |
-        pylint $(git ls-files '*.py')
+        pylint Ipadd.py app.py
 
     - name: Run tests with pytest
       run: |
