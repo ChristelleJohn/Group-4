@@ -117,5 +117,5 @@ def main():
     app = IPInfoApp(master=root)
     app.mainloop()
 
-if __name__ == "__main__":
+if __name__ == "_main_":
     main()
