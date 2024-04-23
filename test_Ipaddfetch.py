@@ -1,6 +1,6 @@
 import pytest
 import tkinter as tk
-from ip_info_app import IPInfoApp
+from Ipaddfetch.py import Ipaddfetch.py
 
 @pytest.fixture
 def app():
