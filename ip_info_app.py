@@ -1,7 +1,31 @@
 import requests
 import tkinter as tk
-from tkinter import Label, Button, Text, font, BooleanVar, Checkbutton, Frame, Entry
+from tkinter import Label, Button, Text, font, BooleanVar, Checkbutton, Frame
+from tkinter import ttk
 
+def get_ip_info(ip_address):
+    # You can replace this with a call to a real API
+    if is_valid_ip(ip_address):
+        return {
+            "country_name": "United States",
+            "city": "Mountain View",
+            "state_prov": "California",
+            "time_zone": "America/Los_Angeles",
+            "latitude": 37.386,
+            "longitude": -122.084,
+            "organization": "Google LLC",
+            "isp": "Google",
+            "asn": "AS15169"
+        }
+    else:
+        return None
+
+def is_valid_ip(ip_address):
+    try:
+        parts = ip_address.split('.')
+        return len(parts) == 4 and all(0 <= int(part) < 256 for part in parts)
+    except ValueError:
+        return False
 
 class IPInfoApp(tk.Frame):
     def __init__(self, master=None):
@@ -20,10 +44,10 @@ class IPInfoApp(tk.Frame):
         self.ip_label = Label(self, text="Enter IP Address (optional):", bg="#f0f0f0")
         self.ip_label.pack()
 
-        style = tk.ttk.Style()
+        style = ttk.Style()
         style.theme_use('clam')
         style.configure('Rounded.TEntry', borderwidth=1, relief="solid", padding=5, foreground="black", font=('Arial', 10))
-        self.ip_entry = tk.ttk.Entry(self, style='Rounded.TEntry')
+        self.ip_entry = ttk.Entry(self, style='Rounded.TEntry')
         self.ip_entry.pack()
 
         self.fields_label = Label(self, text="Select fields to display (optional):", bg="#f0f0f0")
@@ -55,23 +79,28 @@ class IPInfoApp(tk.Frame):
         self.test_button.grid(row=len(self.fields) // 2 + 1, column=0, columnspan=2, sticky='ew', pady=10)
 
     def fetch_ip_info(self):
-        # Method to fetch IP information
-        pass
+        ip_address = self.ip_entry.get()
+        if is_valid_ip(ip_address):
+            data = get_ip_info(ip_address)
+            self.text_widget.delete(1.0, "end")
+            if data:
+                for key, value in data.items():
+                    self.text_widget.insert("end", f"{key}: {value}\n")
+        else:
+            self.text_widget.insert("end", "Invalid IP address.\n")
 
     def clear_text_widget(self):
-        # Method to clear text widget
-        pass
+        self.text_widget.delete(1.0, "end")
 
     def test_ip_info_fetching(self):
-        # Method to test fetching IP information
-        pass
-
+        # Simulated test, you should replace it with real functionality later
+        self.ip_entry.insert(0, "8.8.8.8")
+        self.fetch_ip_info()
 
 def main():
     root = tk.Tk()
     app = IPInfoApp(master=root)
     app.mainloop()
-
 
 if __name__ == "__main__":
     main()
