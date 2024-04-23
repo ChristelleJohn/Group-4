@@ -13,7 +13,7 @@ class IPInfoApp(Frame):
         self.master = master
         self.initUI()
 
-    def initUI(self):
+    def test_initUI(self):
         self.master.title("IP Address Information")
         self.pack(fill="both", expand=True)
 
