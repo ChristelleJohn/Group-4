@@ -21,5 +21,5 @@ def test_invalid_ip_address(app):
 
 # Add more test cases as needed
 
-if __name__ == "__main__":app.run()
+if __name__ == "__main__":
     pytest.main()
