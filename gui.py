@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 from tkinter import Label, Button, Text, font, BooleanVar, Checkbutton, Frame, Entry
 
 class IPInfoApp(tk.Frame):
