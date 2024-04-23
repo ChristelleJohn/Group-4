@@ -1,8 +1,9 @@
 import requests
 import tkinter as tk
-from tkinter import ttk, Label, Button, Text, font, BooleanVar, Checkbutton, Frame
+from tkinter import Label, Button, Text, font, BooleanVar, Checkbutton, Frame, Entry
 
-class IPInfoApp(Frame):
+
+class IPInfoApp(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
         self.master = master
@@ -19,10 +20,10 @@ class IPInfoApp(Frame):
         self.ip_label = Label(self, text="Enter IP Address (optional):", bg="#f0f0f0")
         self.ip_label.pack()
 
-        style = ttk.Style()
+        style = tk.ttk.Style()
         style.theme_use('clam')
         style.configure('Rounded.TEntry', borderwidth=1, relief="solid", padding=5, foreground="black", font=('Arial', 10))
-        self.ip_entry = ttk.Entry(self, style='Rounded.TEntry')
+        self.ip_entry = tk.ttk.Entry(self, style='Rounded.TEntry')
         self.ip_entry.pack()
 
         self.fields_label = Label(self, text="Select fields to display (optional):", bg="#f0f0f0")
@@ -54,63 +55,23 @@ class IPInfoApp(Frame):
         self.test_button.grid(row=len(self.fields) // 2 + 1, column=0, columnspan=2, sticky='ew', pady=10)
 
     def fetch_ip_info(self):
-        api_key = "767d97f0f74e48408bce2b8588833d41"
-        ip_address = self.ip_entry.get().strip()
-        fields = [field for field, var in self.selected_fields if var.get()]
-
-        if ip_address and not self.is_valid_ip(ip_address):
-            self.clear_text_widget()
-            self.text_widget.insert("end", "Invalid IP address format.")
-            return
-
-        ip_data = self.get_ip_info(api_key, ip_address, fields)
-        self.display_ip_info(ip_data)
-
-    def get_ip_info(self, api_key, ip_address=None, fields=None):
-        url = f"https://api.ipgeolocation.io/ipgeo?apiKey={api_key}"
-        if ip_address:
-            url += f"&ip={ip_address}"
-        if fields:
-            url += f"&fields={','.join(fields)}"
-        try:
-            response = requests.get(url)
-            if response.status_code == 200:
-                return response.json()
-            else:
-                return {"error": f"Error: {response.status_code}"}
-        except requests.exceptions.RequestException as e:
-            return {"error": f"Network Error: {e}"}
-
-    def display_ip_info(self, ip_data):
-        self.text_widget.delete("1.0", "end")
-        if "error" in ip_data:
-            self.text_widget.insert("end", f"Error: {ip_data['error']}")
-        else:
-            self.text_widget.insert("end", "IP Address Information:\n")
-            for key, value in ip_data.items():
-                self.text_widget.insert("end", f"  {key}: {value}\n")
+        # Method to fetch IP information
+        pass
 
     def clear_text_widget(self):
-        self.text_widget.delete("1.0", "end")
-
-    def is_valid_ip(self, ip):
-        parts = ip.split('.')
-        if len(parts) != 4:
-            return False
-        for part in parts:
-            if not part.isdigit() or not 0 <= int(part) <= 255:
-                return False
-        return True
+        # Method to clear text widget
+        pass
 
     def test_ip_info_fetching(self):
-        # You can add your testing code here
-        # For example, you can print some test results to the console
-        print("Testing IP Information Fetching")
+        # Method to test fetching IP information
+        pass
+
 
 def main():
     root = tk.Tk()
     app = IPInfoApp(master=root)
     app.mainloop()
+
 
 if __name__ == "__main__":
     main()
