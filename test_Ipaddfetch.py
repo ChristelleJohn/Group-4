@@ -1,7 +1,7 @@
 import pytest
 import tkinter as tk
 from ip_info_app import IPInfoApp
-from ipaddfetch import get_ip_info, is_valid_ip
+from ip_info_app import get_ip_info, is_valid_ip
 
 @pytest.fixture
 def app():
