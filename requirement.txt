@@ -1,5 +1,0 @@
-requests
-pytest
-flask
-tk
-flake8
