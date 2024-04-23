@@ -1,6 +1,7 @@
 import pytest
 import tkinter as tk
 from ip_info_app import IPInfoApp
+from ip_info_app_controller import IPInfoAppController
 
 @pytest.fixture
 def app():
