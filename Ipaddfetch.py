@@ -1,11 +1,6 @@
 import requests
-import time
-import socket
 import tkinter as tk
-import tkinter.simpledialog as simpledialog
-from tkinter import Tk, Label, Button, Text, font, BooleanVar, Checkbutton, Frame, Entry
-from tkinter import messagebox
-from tkinter import ttk
+from tkinter import ttk, Label, Button, Text, font, BooleanVar, Checkbutton, Frame
 
 class IPInfoApp(Frame):
     def __init__(self, master=None):
