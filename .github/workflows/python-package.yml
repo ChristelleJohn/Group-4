@@ -22,11 +22,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests pytest
 
-      - name: Start Xvfb
+      - name: Start Xvfb and run tests
         run: |
           Xvfb :99 -ac &
           export DISPLAY=:99
-
-      - name: Run tests
-        run: |
           pytest
+        env:
+          DISPLAY: :99
