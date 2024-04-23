@@ -24,9 +24,9 @@ jobs:
 
     - name: Analyze code with pylint
       run: |
-        pylint Ipadd.py app.py
+        pylint Ipaddfetch.py app.py
 
     - name: Run tests with pytest
       run: |
-        pytest Ipadd.py
+        pytest Ipaddfetch.py
         pytest app.py
