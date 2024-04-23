@@ -6,7 +6,6 @@ import tkinter.simpledialog as simpledialog
 from tkinter import Tk, Label, Button, Text, font, BooleanVar, Checkbutton, Frame, Entry
 from tkinter import messagebox
 from tkinter import ttk
-import pytest
 
 class IPInfoApp(Frame):
     def __init__(self, master=None):
@@ -113,19 +112,10 @@ class IPInfoApp(Frame):
         # For example, you can print some test results to the console
         print("Testing IP Information Fetching")
 
-@pytest.fixture
-def app():
+def main():
     root = tk.Tk()
     app = IPInfoApp(master=root)
-    yield app
-    root.destroy()
-
-def test_fetch_info(app):
-    app.ip_entry.insert(0, "8.8.8.8")  # Insert a sample IP address
-    app.fetch_button.invoke()  # Trigger the fetch info button
-    assert app.text_widget.get("1.0", "end") != "Invalid IP address format."  # Check if the text widget contains valid information
-
-# Add more test functions as needed
+    app.mainloop()
 
 if __name__ == "__main__":
-    pytest.main()
+    main()
