@@ -1,31 +1,23 @@
-import requests
 import tkinter as tk
 from tkinter import Label, Button, Text, font, BooleanVar, Checkbutton, Frame
 from tkinter import ttk
+import requests
 
-def get_ip_info(ip_address):
-    # You can replace this with a call to a real API
-    if is_valid_ip(ip_address):
-        return {
-            "country_name": "United States",
-            "city": "Mountain View",
-            "state_prov": "California",
-            "time_zone": "America/Los_Angeles",
-            "latitude": 37.386,
-            "longitude": -122.084,
-            "organization": "Google LLC",
-            "isp": "Google",
-            "asn": "AS15169"
-        }
-    else:
-        return None
-
-def is_valid_ip(ip_address):
+def get_ip_info(api_key, ip_address, fields):
+    """Fetches IP address information using the specified API and returns a dictionary."""
+    url = f"https://api.ipgeolocation.io/ipgeo?apiKey={api_key}"
+    if ip_address:
+        url += f"&ip={ip_address}"
+    if fields:
+        url += f"&fields={','.join(fields)}"
     try:
-        parts = ip_address.split('.')
-        return len(parts) == 4 and all(0 <= int(part) < 256 for part in parts)
-    except ValueError:
-        return False
+        response = requests.get(url)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return {"error": f"Error: {response.status_code}"}
+    except requests.exceptions.RequestException as e:
+        return {"error": f"Network Error: {e}"}
 
 class IPInfoApp(tk.Frame):
     def __init__(self, master=None):
@@ -79,21 +71,26 @@ class IPInfoApp(tk.Frame):
         self.test_button.grid(row=len(self.fields) // 2 + 1, column=0, columnspan=2, sticky='ew', pady=10)
 
     def fetch_ip_info(self):
+        api_key = '767d97f0f74e48408bce2b8588833d41' 
         ip_address = self.ip_entry.get()
-        if is_valid_ip(ip_address):
-            data = get_ip_info(ip_address)
-            self.text_widget.delete(1.0, "end")
-            if data:
-                for key, value in data.items():
-                    self.text_widget.insert("end", f"{key}: {value}\n")
+        selected_fields = [field for field, var in self.selected_fields if var.get()]
+        ip_data = get_ip_info(api_key, ip_address, selected_fields)
+        self.display_ip_info(ip_data)
+
+    def display_ip_info(self, ip_data):
+        """Displays the provided IP information in the text widget."""
+        self.text_widget.delete("1.0", "end")
+        if "error" in ip_data:
+            self.text_widget.insert("end", f"Error: {ip_data['error']}")
         else:
-            self.text_widget.insert("end", "Invalid IP address.\n")
+            self.text_widget.insert("end", "IP Address Information:\n")
+            for key, value in ip_data.items():
+                self.text_widget.insert("end", f"  {key}: {value}\n")
 
     def clear_text_widget(self):
-        self.text_widget.delete(1.0, "end")
+        self.text_widget.delete("1.0", "end")
 
     def test_ip_info_fetching(self):
-        # Simulated test, you should replace it with real functionality later
         self.ip_entry.insert(0, "8.8.8.8")
         self.fetch_ip_info()
 
