@@ -11,7 +11,8 @@ def app():
 def test_fetch_ip_info(app):
     # Test fetching IP information with valid IP address
     ip_address = "8.8.8.8"
-    ip_data = get_ip_info(ip_address)
+    api_key = '767d97f0f74e48408bce2b8588833d41'  
+    ip_data = get_ip_info(api_key, ip_address, [])
     assert isinstance(ip_data, dict)
     assert ip_data["country_name"] == "United States"
 
