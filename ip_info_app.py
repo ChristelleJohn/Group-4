@@ -18,6 +18,17 @@ def get_ip_info(api_key, ip_address, fields):
             return {"error": f"Error: {response.status_code}"}
     except requests.exceptions.RequestException as e:
         return {"error": f"Network Error: {e}"}
+    
+
+def is_valid_ip(ip):
+    """Validates the format of an IP address."""
+    parts = ip.split('.')
+    if len(parts) != 4:
+        return False
+    for part in parts:
+        if not part.isdigit() or not 0 <= int(part) <= 255:
+            return False
+    return True
 
 class IPInfoApp(tk.Frame):
     def __init__(self, master=None):
